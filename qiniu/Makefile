@@ -1,2 +1,4 @@
 all:
-	echo "Build ok"
+	npm install qiniu;
+clean:
+	rm -rf node_modules;
