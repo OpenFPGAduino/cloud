@@ -56,4 +56,5 @@ function uploadFile(localFile, key, uptoken) {
 }
 
 uploadBuf("lizhizhou", "li.txt", uptoken("openfpgaduino"));
+uploadFile("Makefile", "Makefile", uptoken("openfpgaduino"));
 
