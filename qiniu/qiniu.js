@@ -55,6 +55,7 @@ function uploadFile(localFile, key, uptoken) {
   });
 }
 
-uploadBuf("lizhizhou", "li.txt", uptoken("openfpgaduino"));
-uploadFile("Makefile", "Makefile", uptoken("openfpgaduino"));
+uploadBuf("lizhizhou test", "li.txt", uptoken("openfpgaduino"));
+uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken("openfpgaduino"));
+
 
