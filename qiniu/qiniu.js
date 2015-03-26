@@ -98,6 +98,22 @@ http.get(options, function(res) {
     });
 };
 
-/*
-$ curl --data "build=true" -X POST https://registry.hub.docker.com/u/lizhizhou/cloudfpga/trigger/4dd21468-2d62-40e7-8ff3-98db4fc22a9a/
-*/
+var https = require('https');
+var postData = 'build=true';
+
+var options = {
+  hostname: 'registry.hub.docker.com',
+  port: 443,
+  path: '/u/lizhizhou/cloudfpga/trigger/4dd21468-2d62-40e7-8ff3-98db4fc22a9a/',
+  method: 'POST'
+};
+
+var req = https.request(options, function(res) {
+  console.log("statusCode: ", res.statusCode);
+  console.log("headers: ", res.headers);
+  res.on('data', function(d) {
+    process.stdout.write(d);
+  });
+});
+req.write(postData);
+req.end();
