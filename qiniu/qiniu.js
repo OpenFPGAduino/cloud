@@ -1,7 +1,17 @@
+// Dependencies
+var fs = require('fs');
+var url = require('url');
+var http = require('http');
+var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 var qiniu = require("qiniu");
 
-qiniu.conf.ACCESS_KEY = 'IrDtWu7b7mBVDqSjLcek1kfbb3CM90JblgImlko6'
-qiniu.conf.SECRET_KEY = '1UlARj0pqeAiL_ipBLke1Gm_HBGNL60KDrSDjUdX'
+qiniu.conf.ACCESS_KEY = 'IrDtWu7b7mBVDqSjLcek1kfbb3CM90JblgImlko6';
+qiniu.conf.SECRET_KEY = '1UlARj0pqeAiL_ipBLke1Gm_HBGNL60KDrSDjUdX';
+
+var bucketname = 'openfpgaduino';
+var cloudname = 'http://7xi3cc.com1.z0.glb.clouddn.com/';
+var gzfilename = 'grid.tar.gz';
 
 function uptoken(bucketname) {
   var putPolicy = new qiniu.rs.PutPolicy(bucketname);
@@ -55,15 +65,8 @@ function uploadFile(localFile, key, uptoken) {
   });
 }
 
-uploadBuf("lizhizhou test", "li.txt", uptoken("openfpgaduino"));
-uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken("openfpgaduino"));
-
-// Dependencies
-var fs = require('fs');
-var url = require('url');
-var http = require('http');
-var exec = require('child_process').exec;
-var spawn = require('child_process').spawn;
+uploadBuf("lizhizhou test", "li.txt", uptoken(bucketname));
+uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
 
 // App variables
 var file_url = 'http://7xi3cc.com1.z0.glb.clouddn.com/grid.tar.gz';
@@ -99,12 +102,15 @@ http.get(options, function(res) {
 };
 
 var https = require('https');
+var dockername = 'registry.hub.docker.com'; 
+var dockerpath = '/u/lizhizhou/cloudfpga/trigger/';
+var token = 'c0a34362-5a62-4d9a-921d-ed3ce9724f6f';
 var postData = 'build=true';
 
 var options = {
-  hostname: 'registry.hub.docker.com',
+  hostname: dockername,
   port: 443,
-  path: '/u/lizhizhou/cloudfpga/trigger/4dd21468-2d62-40e7-8ff3-98db4fc22a9a/',
+  path: dockerpath + token +'/',
   method: 'POST'
 };
 
