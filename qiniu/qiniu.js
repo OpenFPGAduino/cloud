@@ -6,6 +6,7 @@ var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
 var qiniu = require("qiniu");
 
+// file upload 
 qiniu.conf.ACCESS_KEY = 'IrDtWu7b7mBVDqSjLcek1kfbb3CM90JblgImlko6';
 qiniu.conf.SECRET_KEY = '1UlARj0pqeAiL_ipBLke1Gm_HBGNL60KDrSDjUdX';
 
@@ -68,6 +69,7 @@ function uploadFile(localFile, key, uptoken) {
 uploadBuf("lizhizhou test", "li.txt", uptoken(bucketname));
 uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
 
+// http file download
 // App variables
 var file_url = 'http://7xi3cc.com1.z0.glb.clouddn.com/grid.tar.gz';
 var DOWNLOAD_DIR = './downloads/';
@@ -101,6 +103,7 @@ http.get(options, function(res) {
     });
 };
 
+// docker http trigger
 var https = require('https');
 var dockername = 'registry.hub.docker.com'; 
 var dockerpath = '/u/lizhizhou/cloudfpga/trigger/';
