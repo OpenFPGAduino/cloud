@@ -64,13 +64,14 @@ function uploadFile(localFile, key, uptoken) {
       // http://developer.qiniu.com/docs/v6/api/reference/codes.html
     }
   });
-}s
+}
 
-function rmFile(bucketname, key) {
+function rmFile(bucketName, key) {
 var client = new qiniu.rs.Client();
 client.remove(bucketName, key, function(err, ret) {
   if (!err) {
     // ok
+    console.log(ret); 
   } else {
     console.log(err);
     // http://developer.qiniu.com/docs/v6/api/reference/codes.html
@@ -78,6 +79,22 @@ client.remove(bucketName, key, function(err, ret) {
 })
 }
 
+function lsFile(bucketName, key) {
+var client = new qiniu.rs.Client();
+client.stat(bucketName, key, function(err, ret) {
+  if (!err) {
+    // ok 
+    // ret has keys (hash, fsize, putTime, mimeType)
+    console.log(ret); 
+  } else {
+    console.log(err);
+    // http://developer.qiniu.com/docs/v6/api/reference/codes.html
+  }
+});
+}
+
+/*
+function lsFile(bucketname, key) {
 qiniu.rsf.listPrefix(bucketname, prefix, marker, limit, function(err, ret) {
   if (!err) {
     // process ret.marker & ret.items
@@ -86,21 +103,11 @@ qiniu.rsf.listPrefix(bucketname, prefix, marker, limit, function(err, ret) {
     // http://developer.qiniu.com/docs/v6/api/reference/rs/list.html
   }
 });
+}
 
-var client = new qiniu.rs.Client();
-client.stat(bucketName, key, function(err, ret) {
-  if (!err) {
-    // ok 
-    // ret has keys (hash, fsize, putTime, mimeType)
-  } else {
-    console.log(err);
-    // http://developer.qiniu.com/docs/v6/api/reference/codes.html
-  }
-});
+*/
 
-
-
-rmFile("bucketname", "list.txt");
+rmFile(bucketname, "list.txt");
 uploadBuf("grid.v", "list.txt", uptoken(bucketname));
 uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
 
@@ -127,15 +134,7 @@ var options = {
 
 var file_name = url.parse(file_url).pathname.split('/').pop();
 var file = fs.createWriteStream(DOWNLOAD_DIR + file_name);
-var client = new qiniu.rs.Client();
-client.remove(bucketName, key, function(err, ret) {
-  if (!err) {
-    // ok
-  } else {
-    console.log(err);
-    // http://developer.qiniu.com/docs/v6/api/reference/codes.html
-  }
-})
+
 http.get(options, function(res) {
     res.on('data', function(data) {
             file.write(data);
