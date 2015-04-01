@@ -93,11 +93,15 @@ client.stat(bucketName, key, function(err, ret) {
 });
 }
 
-/*
-function lsFile(bucketname, key) {
+
+function lsBucket(bucketname) {
+var prefix = null;
+var marker = null;
+var limit = 100;
 qiniu.rsf.listPrefix(bucketname, prefix, marker, limit, function(err, ret) {
   if (!err) {
-    // process ret.marker & ret.items
+    // process ret.marker & ret.it    
+    console.log(ret);
   } else {
     console.log(err)
     // http://developer.qiniu.com/docs/v6/api/reference/rs/list.html
@@ -105,11 +109,13 @@ qiniu.rsf.listPrefix(bucketname, prefix, marker, limit, function(err, ret) {
 });
 }
 
-*/
+lsFile(bucketname, "list.txt");
+lsBucket(bucketname);
 
-rmFile(bucketname, "list.txt");
-uploadBuf("grid.v", "list.txt", uptoken(bucketname));
-uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
+//rmFile(bucketname, "list.txt");
+//uploadBuf("grid.v", "list.txt", uptoken(bucketname));
+//uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
+
 
 // http file download
 // App variables
@@ -159,6 +165,7 @@ var options = {
   method: 'POST'
 };
 
+/*
 var req = https.request(options, function(res) {
   console.log("statusCode: ", res.statusCode);
   console.log("headers: ", res.headers);
@@ -168,3 +175,4 @@ var req = https.request(options, function(res) {
 });
 req.write(postData);
 req.end();
+*/
