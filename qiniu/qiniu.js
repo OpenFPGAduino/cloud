@@ -114,7 +114,8 @@ lsBucket(bucketname);
 
 //rmFile(bucketname, "list.txt");
 //uploadBuf("grid.v", "list.txt", uptoken(bucketname));
-//uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
+uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
+uploadFile("../../fpga/package/grid.tar.gz", "smart.log", uptoken(bucketname));
 
 
 // http file download
@@ -165,14 +166,16 @@ var options = {
   method: 'POST'
 };
 
-/*
-var req = https.request(options, function(res) {
-  console.log("statusCode: ", res.statusCode);
-  console.log("headers: ", res.headers);
-  res.on('data', function(d) {
-    process.stdout.write(d);
-  });
-});
-req.write(postData);
-req.end();
-*/
+function dock_build() {
+	var req = https.request(options, function(res) {
+	  console.log("statusCode: ", res.statusCode);
+	  console.log("headers: ", res.headers);
+	  res.on('data', function(d) {
+	    process.stdout.write(d);
+	  });
+	});
+	req.write(postData);
+	req.end();
+}
+
+//dock_build();
