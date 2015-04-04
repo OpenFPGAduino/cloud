@@ -6,6 +6,15 @@ var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
 var qiniu = require("qiniu");
 
+var upload = false;
+var download = false;
+var arguments = process.argv.splice(2);
+for (index in arguments)
+{
+	if (arguments[index]=="-upload") upload=true;
+        else if (arguments[index]=="-download") download = true;
+}
+
 // file upload 
 qiniu.conf.ACCESS_KEY = 'IrDtWu7b7mBVDqSjLcek1kfbb3CM90JblgImlko6';
 qiniu.conf.SECRET_KEY = '1UlARj0pqeAiL_ipBLke1Gm_HBGNL60KDrSDjUdX';
@@ -109,27 +118,29 @@ qiniu.rsf.listPrefix(bucketname, prefix, marker, limit, function(err, ret) {
 });
 }
 
-lsFile(bucketname, "list.txt");
-lsBucket(bucketname);
-
-//rmFile(bucketname, "list.txt");
-//uploadBuf("grid.v", "list.txt", uptoken(bucketname));
-uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
-uploadFile("../../fpga/package/grid.tar.gz", "smart.log", uptoken(bucketname));
-
+if (upload == true) {
+	lsFile(bucketname, "filelist.txt");
+	lsBucket(bucketname);
+	//rmFile(bucketname, "list.txt");
+	//uploadBuf("grid.v", "list.txt", uptoken(bucketname));
+	uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
+	uploadFile("../../fpga/package/grid.tar.gz", "smart.log", uptoken(bucketname));
+}
 
 // http file download
 // App variables
-var file_url = 'http://7xi3cc.com1.z0.glb.clouddn.com/grid.tar.gz';
-var DOWNLOAD_DIR = './downloads/';
+var file_url = 'http://7xi3cc.com1.z0.glb.clouddn.com/grid.v';
+var DOWNLOAD_DIR = '../../fpga/package/';
 
 // We will be downloading the files to a directory, so make sure it's there
 // This step is not required if you have manually created the directory
-var mkdir = 'mkdir -p ' + DOWNLOAD_DIR;
-var child = exec(mkdir, function(err, stdout, stderr) {
-    if (err) throw err;
-    else download_file_httpget(file_url);
-});
+if (download == true) {
+	var mkdir = 'mkdir -p ' + DOWNLOAD_DIR;
+	var child = exec(mkdir, function(err, stdout, stderr) {
+	    if (err) throw err;
+	    else download_file_httpget(file_url);
+	});
+}
 
 // Function to download file using HTTP.get
 var download_file_httpget = function(file_url) {
@@ -151,6 +162,7 @@ http.get(options, function(res) {
         });
     });
 };
+
 
 // docker http trigger
 var https = require('https');
