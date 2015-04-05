@@ -155,15 +155,17 @@ var file_name = url.parse(file_url).pathname.split('/').pop();
 var file = fs.createWriteStream(DOWNLOAD_DIR + file_name);
 
 http.get(options, function(res) {
+	console.log('STATUS: ' + res.statusCode);
+	console.log('HEADERS: ' + JSON.stringify(res.headers));
     res.on('data', function(data) {
             file.write(data);
+            console.log(data);
         }).on('end', function() {
             file.end();
             console.log(file_name + ' downloaded to ' + DOWNLOAD_DIR);
         });
     });
 };
-
 
 // docker http trigger
 var https = require('https');
