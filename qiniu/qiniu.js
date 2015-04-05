@@ -124,12 +124,13 @@ if (upload == true) {
 	//rmFile(bucketname, "list.txt");
 	//uploadBuf("grid.v", "list.txt", uptoken(bucketname));
 	uploadFile("../../fpga/package/grid.tar.gz", "grid.tar.gz", uptoken(bucketname));
-	uploadFile("../../fpga/package/grid.tar.gz", "smart.log", uptoken(bucketname));
+	uploadFile("../../fpga/smart.log", "smart.log", uptoken(bucketname));
 }
 
 // http file download
 // App variables
 var file_url = 'http://7xi3cc.com1.z0.glb.clouddn.com/grid.v';
+//var file_url = 'http://7xi3cc.com1.z0.glb.clouddn.com/grid.tar.gz';
 var DOWNLOAD_DIR = '../../fpga/package/';
 
 // We will be downloading the files to a directory, so make sure it's there
