@@ -5,7 +5,7 @@ ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/gcc/bin:/
 RUN rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/OpenFPGAduino/fpga.git
 RUN git clone https://github.com/OpenFPGAduino/cloud.git
-RUN echo "nameserver 8.8.8.8" > /etc/hosts
+RUN echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 # RUN cd cloud/qiniu; make build;
 RUN cat /etc/resolv.conf
 RUN ping 7xi3cc.com1.z0.glb.clouddn.com -c 3
