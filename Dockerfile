@@ -5,4 +5,5 @@ ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/gcc/bin:/
 RUN rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/OpenFPGAduino/fpga.git
 RUN git clone https://github.com/OpenFPGAduino/cloud.git
+RUN echo "183.136.217.66 7xi3cc.com1.z0.glb.clouddn.com" >> /etc/hosts
 RUN cd cloud/qiniu; make build;
