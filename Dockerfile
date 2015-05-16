@@ -5,4 +5,4 @@ ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/gcc/bin:/
 RUN rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/OpenFPGAduino/fpga.git
 RUN git clone https://github.com/OpenFPGAduino/cloud.git
-RUN cd cloud/qiniu; npm install qiniu; make build;
+RUN cd cloud/qiniu; make build;
