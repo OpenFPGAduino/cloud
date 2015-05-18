@@ -5,7 +5,6 @@ var http = require('http');
 var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
 var qiniu = require("qiniu");
-
 var upload = false;
 var download = false;
 var arguments = process.argv.splice(2);
@@ -15,12 +14,21 @@ for (index in arguments)
         else if (arguments[index]=="-download") download = true;
 }
 
+var domainname = '7xi3cc.com1.z0.glb.clouddn.com';
+
+var dns = require('dns');
+dns.setServers(['8.8.8.8']);
+console.log(dns.getServers());
+dns.resolve4(domainname, function onLookup(err, addresses) {
+  console.log('addresses:', addresses);
+
 // file upload 
 qiniu.conf.ACCESS_KEY = 'IrDtWu7b7mBVDqSjLcek1kfbb3CM90JblgImlko6';
 qiniu.conf.SECRET_KEY = '1UlARj0pqeAiL_ipBLke1Gm_HBGNL60KDrSDjUdX';
 
 var bucketname = 'openfpgaduino';
-var cloudname = 'http://7xi3cc.com1.z0.glb.clouddn.com/';
+var cloudname = 'http://'+ addresses[0];
+//var cloudname =  'http://' + domainname;
 var gzfilename = 'grid.tar.gz';
 
 function uptoken(bucketname) {
@@ -129,7 +137,8 @@ if (upload == true) {
 
 // http file download
 // App variables
-var file_url = 'http://7xi3cc.com1.z0.glb.clouddn.com/grid.v';
+var file_url = cloudname+'/grid.v';
+console.log(file_url);
 //var file_url = 'http://7xi3cc.com1.z0.glb.clouddn.com/grid.tar.gz';
 var DOWNLOAD_DIR = '../../fpga/package/';
 
@@ -194,3 +203,5 @@ function dock_build() {
 }
 
 //dock_build();
+
+});
