@@ -27,7 +27,7 @@ qiniu.conf.ACCESS_KEY = 'IrDtWu7b7mBVDqSjLcek1kfbb3CM90JblgImlko6';
 qiniu.conf.SECRET_KEY = '1UlARj0pqeAiL_ipBLke1Gm_HBGNL60KDrSDjUdX';
 
 var bucketname = 'openfpgaduino';
-var cloudname = 'http://'+ addresses[0];
+var cloudname = 'http://'+ domainname;
 //var cloudname =  'http://' + domainname;
 var gzfilename = 'grid.tar.gz';
 
@@ -155,11 +155,11 @@ if (download == true) {
 // Function to download file using HTTP.get
 var download_file_httpget = function(file_url) {
 var options = {
-    host: url.parse(file_url).host,
+    host: addresses[0],//url.parse(file_url).host,
     port: 80,
-    path: url.parse(file_url).pathname
+    path: '/'+domainname+url.parse(file_url).pathname
 };
-
+console.log(options.path);
 var file_name = url.parse(file_url).pathname.split('/').pop();
 var file = fs.createWriteStream(DOWNLOAD_DIR + file_name);
 
