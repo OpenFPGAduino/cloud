@@ -1,5 +1,5 @@
 all:
-	npm install qiniu;
+	#npm install qiniu;
 build:
 	node qiniu.js -download;
 	cd ../../fpga/; ./package_build.sh;
