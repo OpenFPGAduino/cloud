@@ -44,7 +44,7 @@ app.use('/wechat', wechat(config, function (req, res, next) {
       content: 'text object',
       type: 'text'
     });
-  } else if (message.FromUserName === 'hehe') {
+  } else if (message.Content === 'hehe') {
     // reply with music
     res.reply({
       type: "music",
@@ -59,10 +59,10 @@ app.use('/wechat', wechat(config, function (req, res, next) {
     // reply with thumbnails posts
     res.reply([
       {
-        title: 'Come to fetch me',
-        description: 'or you want to play in another way ?',
-        picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-        url: 'http://nodeapi.cloudfoundry.com/'
+        title: 'The openfpgaduino website',
+        description: 'View the sourcecode of the openfpgaduino website',
+        picurl: 'https://github.com/OpenFPGAduino/docs/blob/master/main.jpg',
+        url: 'https://github.com/OpenFPGAduino/OpenFPGAduino'
       }
     ]);
   }
