@@ -1,4 +1,5 @@
 /*
+/*
  * Author: 
  *         Zhizhou Li <lzz@meteroi.com>
  *
@@ -16,17 +17,17 @@
  *
  */
 var http = require("http"),
-	url  = require("url"),
-	path = require("path"),
-	fs   = require("fs"),
-	querystring = require("querystring"),
+        url  = require("url"),
+        path = require("path"),
+        fs   = require("fs"),
+        querystring = require("querystring"),
         connect = require('connect');
         wechat = require('wechat');
 
 var config = {
-  token: 'weline',
+  token: 'openfpgaduino',
   appid: 'wxc61069fb23ba1314',
-  encodingAESKey: 'Fi7m6Qwua3VsBL8K4rc8tZxU5SnZVU3brK2ADLCmSdQ'
+  encodingAESKey: '1gbKlesArQVc6fNaGBi15rx2QrzARHaiyS8nDpnYAuv'
 };
 
 var app = connect();
@@ -66,3 +67,4 @@ app.use('/wechat', wechat(config, function (req, res, next) {
     ]);
   }
 }));
+http.createServer(app).listen(80);
