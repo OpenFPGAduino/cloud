@@ -1,2 +1,4 @@
 all:
-	npm install wechat
+	npm install
+clean:
+	rm -rf node_modules

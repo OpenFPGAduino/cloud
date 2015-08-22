@@ -1,8 +1,8 @@
 {
-  "name": "wechar",
+  "name": "qiniu_service",
   "version": "0.0.1",
-  "description": "wechat server for opneFPGAduino",
-  "main": "service.js",
+  "description": "Qiniu Cloud service for OpenFPGAduino",
+  "main": "qiniu.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +11,7 @@
     "url": "https://github.com/OpenFPGAduino/cloud.git"
   },
   "dependencies": {
-    "wechat": "1.0.1",
+    "qiniu" : "*"
   },
   "author": "Zhizhou Li",
   "license": "MIT",
@@ -19,8 +19,6 @@
   "devDependencies": {},
   "keywords": [
     "Node",
-    "API",
-    "Documentation",
-    "Service"
+    "qiniu"
   ]
 }
