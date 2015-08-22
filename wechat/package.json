@@ -11,7 +11,7 @@
     "url": "https://github.com/OpenFPGAduino/cloud.git"
   },
   "dependencies": {
-    "wechat": "1.0.1",
+    "wechat": "1.0.1"
   },
   "author": "Zhizhou Li",
   "license": "MIT",
