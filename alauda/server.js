@@ -30,7 +30,7 @@ net.createServer(function(c) {
   c.pipe(client);
   client.pipe(c);
   c.on('close', function() {
-	if(client)client.end();
+	//if(client)client.end();
   });
 }).listen(loc_port, function() {
   console.log('client port on：'+loc_port +'\n');

@@ -3,11 +3,11 @@ var host = 'localhost';//填入机器B的IP或者域名，这里测试填的是�
 var port = 8000;//填入机器B的提供client连接的端口
 var client;
 var loc;
-
+function connect() {
   client = net.connect(port,host, function() {
-	console.log("代理服务端："+host+':'+port+' 连接成功！');
+	console.log("proxy："+host+':'+port+' 连接成功！');
 	loc = net.connect(8888, function() {
-	  console.log('本地远程桌面 3389 连接成功！');
+	  console.log(' 8888 connect ok！');
 	  loc.pipe(client);
 	  client.pipe(loc);
 	});
@@ -19,7 +19,7 @@ var loc;
   });
   client.on('error', function() {
 	console.log("代理服务端："+host+':'+port+' 连接失败，正在重试...');
-	setTimeout(connect,5000);
+	setTimeout(connect,50000);
   });
   client.on('close', function() {
 	delete(client);
@@ -28,4 +28,5 @@ var loc;
 	setTimeout(connect,100);
   });
 
-
+}
+connect();
