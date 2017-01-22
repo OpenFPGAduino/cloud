@@ -32,3 +32,6 @@
 *~
 *.tar
 *.gz
+
+#node cache
+node_modules
